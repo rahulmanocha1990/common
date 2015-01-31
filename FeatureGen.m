@@ -5,6 +5,7 @@ function [Features]=FeatureGen(X,channelist,method,Fs,wlen,wshft)
      % 'F' Higuchi Fractal Dimension
      % 'H' Higher Order Crossing
      % 'P' Power spectrum Based Features
+
 %%
 %Read channel list and get indices for channels
 cd '../data_matlab';
