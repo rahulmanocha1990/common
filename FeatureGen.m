@@ -51,11 +51,13 @@ while i+wlen < N
     start=i+1;
     finish=i+wlen;
     for j=1:length(Cind)
+        Ywin=Y(j,start:finish).*hann(wlen)';
         if any (method=='F')
-          y=HFD(Y(j,start:finish),floor(Fs/2));
+          %y=HFD(Ywin,floor(Fs/32));
+          y=HFD(Ywin,5);
         end
         if any (method=='H')
-          y=[y HFD(Y(j,start:finish),floor(Fs/2))];
+          y=[y HFD(Ywin,floor(Fs/2))];
         end
         
         
