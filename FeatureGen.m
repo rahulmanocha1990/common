@@ -54,7 +54,7 @@ while i+wlen < N
         Ywin=Y(j,start:finish).*hann(wlen)';
         if any (method=='F')
           %y=HFD(Ywin,floor(Fs/32));
-          y=HFD(Ywin,5);
+          y=HFD(Ywin,8);
         end
         if any (method=='H')
           y=[y HFD(Ywin,floor(Fs/2))];
