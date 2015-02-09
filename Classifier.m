@@ -4,8 +4,8 @@ function [BestAccuracy,ConfMat,Order]=Classifier(X,method,S,N)
 % method is classification method
         % 'svm'  svm classifier
         % 'tree' decision tree
-% S is samples to use for training
-% N is the number of times to repeat cross validation
+% S is samples to use for training eg 0.7,0.8 etc
+% N is the number of times to repeat cross validation eg 10
 %%
 %X=[[zeros(10,1);ones(30,1);2*ones(40,1)] rand(80,20)];
 %%
