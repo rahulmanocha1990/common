@@ -21,7 +21,11 @@ function [Features]=FeatureGen(X,Cind,wlen,wshft,Fs,varargin)
 %                           Valid Values are char string : 'msdefg' -> selects all statistical features
 %                           
 %       'WavEnt'            Relative Wavelet Entopy
-%                           Default :
+%                           Valid Values are cell array : {5,'db4',1} ->
+%                           first value is number of levels , second is
+%                           wavelet type and third is to select entropy or
+%                           energy
+                            
 %                           
 %       'PowSpec'           Power Spectrum Based Features. Power of specified frequency bins
 %                           Valid Values are cell array of frequency bins :
@@ -58,6 +62,7 @@ while i+wlen < N
     finish=i+wlen;
     for j=1:length(Cind)
         Ywin=Y(j,start:finish).*hann(wlen)';
+        y=[];
         if ~isempty(frctl)
           y=HFD(Ywin,frctl);
         end
@@ -71,9 +76,12 @@ while i+wlen < N
             [P,Pr]=BinPower(Ywin,Fs,pow);
           y=[y Pr];
         end
+        if ~isempty(wvlt)
+          y=[y RWE(Ywin,wvlt)];
+        end
         
         Features(count,:,j)=y;
-        y=[];
+       
     end
     i=i+wshft;
     count=count+1;

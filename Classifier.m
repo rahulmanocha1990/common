@@ -33,7 +33,7 @@ for k=1:N
     testdata=[testdata;Xr{i}(testindex,:)];
   end
   if(isequal(method,'svm'))
-      model=libsvmtrain(traindata(:,1),traindata(:,2:end),'-t 1 -d 5 -g 2 -h 0 -c 5');
+      model=libsvmtrain(traindata(:,1),traindata(:,2:end),'-t 1 -d 5 -g 1 -h 0 -c 1');
       [pred_lab]=svmpredict(testdata(:,1),testdata(:,2:end),model);
   elseif(isequal(method,'tree'))
       model=TreeBagger(100,traindata(:,2:end),traindata(:,1),'OOBPred','On');
