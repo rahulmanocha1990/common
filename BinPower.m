@@ -9,7 +9,7 @@ function [Power,PowerRatio]=BinPower(X,Fs,Band)
 %		  Nyquist frequency, i.e., half of sampling frequency. 
 % Fs   -> Sampling frequency
 Lv=2^nextpow2(length(X));
-C=abs(fft(X,Lv));
+C=(abs(fft(X,Lv)).^2)/Lv;
 if(length(Band)==2)
       Band{end+1}='-';
 end
@@ -20,11 +20,11 @@ for Freq_Index=1:length(Band)-1
     if Band{Freq_Index} == '-'
           continue;
     elseif Band{Freq_Index+1} == '-'
-          continue
+          continue;
     end
 	Freq = Band{Freq_Index};										
 	Next_Freq = Band{Freq_Index+1};
-	Power(P_Index) = sum(C(floor(Freq/Fs*Lv):floor(Next_Freq/Fs*Lv)));
+	Power(P_Index) = sum(C(round(Freq/Fs*Lv):round(Next_Freq/Fs*Lv)));
     P_Index=P_Index+1;
 end	
 PowerRatio = Power/sum(Power);
