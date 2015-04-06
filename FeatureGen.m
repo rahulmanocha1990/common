@@ -31,6 +31,7 @@ function [Features]=FeatureGen(X,Cind,wlen,wshft,Fs,varargin)
 %                           Valid Values are cell array of frequency bins :
 %                           {1,4,7,9,'-',19,22} , '-' means skip the band
 %                           9-19 Hz. frequencies should be less than Fs
+%       'welch' 
 %Features matrix has number of rows= number of epochs, columns as Feature
 %vector and 3rd dimension as channels.
 
@@ -51,13 +52,14 @@ dflts= {[],[],[],[],[]};
 %t=2;%2 second epochs
 N=size(X,2);%
 %T=floor(N/Fs);%total seconds in the data
-
+%if(wshft==0)% no shift, use entire waveform
+    
 %%
 Features=[];
 i=0;
 count=1;
 Y=X(Cind,:);
-while i+wlen < N
+while i+wlen <= N
     start=i+1;
     finish=i+wlen;
     for j=1:length(Cind)

@@ -8,6 +8,7 @@ function [Power,PowerRatio]=BinPower(X,Fs,Band)
 %         Each element of Band is a physical frequency and shall not exceed the 
 %		  Nyquist frequency, i.e., half of sampling frequency. 
 % Fs   -> Sampling frequency
+
 Lv=2^nextpow2(length(X));
 C=(abs(fft(X,Lv)).^2)/Lv;
 if(length(Band)==2)
